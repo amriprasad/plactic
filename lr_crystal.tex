@@ -1,0 +1,89 @@
+\documentclass[12pt]{amsart}
+\usepackage{color}
+\newcommand{\rc}[1]{\textcolor{red}{#1}}
+\title{A Crystal Approach to the Littlewood-Richardson Rule}
+\author{Amritanshu Prasad}
+\address{The Institute of Mathematical Sciences, Chennai.}
+\address{Homi Bhabha National Institute, Mumbai.}
+\email{amri@imsc.res.in}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{example}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}[theorem]{Exercise}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+\begin{document}
+\section{Crystal Operators}
+\subsection{Definitions}
+Let $w\in A_n^*$.
+Pick $i\in \{1,\dotsc,n-1\}$.
+For convenience, write $j=i+1$.
+The operator $e_i:A_n^*\to A_n*\cup\{0\}$ is defined via an algorithm.
+At any stage of this algorithm, some letters of $w$ are \emph{frozen} and will not be touched during the rest of the algorithm.
+At each stage the unfrozen part of $w$ will be denoted by $\tilde w$.
+As more and more letters of $w$ are frozen, they are excluded from $\tilde w$.
+\begin{itemize}
+\item Freeze all letters not equal to $i$ or $j$.
+\item While $\tilde w$ is not of the form $i^rj^s$ for $r\geq 0, s\geq 0$:
+  \begin{itemize}
+  \item Freeze all segments of $\tilde w$ of the form $ji$
+  \end{itemize}
+\item If $\tilde w$ does not contain $j$m return $0$.
+\item Otherwise $\tilde w=i^rj^s$ with $r\geq 0$ and $j>0$.
+  Form a word $v$ by changing $\tilde w$ to $i^{r+1}j^{s-1}$ and keeping the frozen part the same.
+\item return $v$.
+\end{itemize}
+\begin{example}
+  Take $w=342443423122211$.
+  We apply $e_1$ to $w$.
+  We will show the frozen part in \rc{red}.
+  The word $\tilde w$ will be what is left in black.
+  \begin{itemize}
+  \item Freeze all letters not equal to $1$ or $2$ to get $w=\rc{34}2\rc{4434}2\rc{3}122211$.
+  \item $\tilde w=22122211$ is not of the from $1^r2^s$, so we enter the loop.
+  \item Freeze segments of $\tilde w$ of the form $21$ to get $w=\rc{34}\rc{2}\rc{4434}2\rc{31}22\rc{21}1$.
+  \item $\tilde w=2221$ is still not of the from $1^r2^s$, so remian inside the loop.
+  \item Freeze segments of $\tilde w$ of the form $21$ to get $w=\rc{34}\rc{2}\rc{4434}2\rc{31}2\rc{2211}$.
+  \item $\tilde w = 22$ is now of the form $1^r2^s$, so exit the loop.
+  \item Form $v=\rc{34}\rc{2}\rc{4434}2\rc{31}1\rc{2211}$.
+  \item Return $v=342443423112211$.
+  \end{itemize}
+  
+  Now we apply $e_2$ to $w$.
+  \begin{itemize}
+  \item Freeze all letters not equal to $2$ or $3$ to get $w=3\rc{4}2\rc{44}3\rc{4}23\rc{1}222\rc{11}$.
+  \item $\tilde w = 32323222$ is not of the form $2^r3^s$, so enter the loop.
+  \item Freeze all segments of the from $32$ to get $w=\rc{342}\rc{44}\rc{342}2\rc{312}22\rc{11}$.
+  \item $\tilde w = 22$ is of the from $2^r3^s$ so exit the loop.
+  \item $3$ does not occur in $\tilde w$ to return $0$.
+  \end{itemize}
+\end{example}
+
+\subsection{Basic Properties}
+\label{sec:basic-properties}
+
+
+\begin{lemma}
+  \label{lemma:knuth-plactic}
+  If $v=e_i(w)$, $v'=e_i(w')$, and $w\equiv w'$, then $v\equiv v'$
+\end{lemma}
+\begin{proof}
+  Check for single Knuth move, which is routine.
+\end{proof}
+\begin{lemma}
+  \label{lemma:tab2tab}
+  If $w$ is a tableau then $e_iw$ is also a tableau.
+\end{lemma}
+\begin{theorem}
+  If $v=e_i(w)$ then $P(v)=e_i(P(w)$.
+\end{theorem}
+\begin{proof}
+  By Lemma~\ref{lemma:knuth-plactic}, $P(v)\equiv e_i(P(w))$.
+  By Lemma~\ref{lemma:tab2tab}, $P(w)$ is a tableau.
+  Since each plactic class contains a unique tableau, $P(v)=e_i(P(w))$.
+\end{proof}
+\end{document}
