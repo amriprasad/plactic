@@ -6,6 +6,7 @@
 \address{The Institute of Mathematical Sciences, Chennai.}
 \address{Homi Bhabha National Institute, Mumbai.}
 \email{amri@imsc.res.in}
+
 \newtheorem{theorem}{Theorem}[subsection]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
@@ -16,7 +17,31 @@
 \newtheorem{example}[theorem]{Example}
 \newtheorem{exercise}[theorem]{Exercise}
 \renewcommand{\thesubsection}{\arabic{subsection}}
+
+\newcommand{\ZZ}{\mathbf Z}
 \begin{document}
+\section{The Plactic Monoid}
+\subsection{Words, rows, and columns}
+Let $A_n$ denote the set $\{1,\dotsc,n\}$, to be thought of as an ordered alphabet.
+Let $A_n^*$ denote the monoid of all words in the alphabet $A_n$.
+Each element of $A_n^*$ is a sequence of the form $w=a_1\dotsb a_l$, where $a_i\in A_n$ for $i=1,\dotc,l$ for some $l\geq 0$.
+The integer $l$ is called the length of the word $w$ and is denoted by $l(w)$.
+The product in the monoid $A_n^*$ is concatenation of words.
+Let $R=\ZZ[x_1,\dotsc,x_n]$.
+Define the \emph{weight function} function $v:A_n^*\to R$ by
+\begin{displaymath}
+  v(a_1\dotsc a_l) = x_{a_1}\dotsb x_{a_l}.
+\end{displaymath}
+
+A word $w\in A_n^*$ is called a \emph{row of length $l$} if it is of the form:
+\begin{displaymath}
+  w = a_1\dotsb a_l \text{ with } a_1\leq a_2\leq \dotsb \leq a_l.
+\end{displaymath}
+A word $w\in A_n^*$ is called a \emph{column of lenght $l$} if it is of the form:
+\begin{displaymath}
+  w = a_1\dotsb a_l \text{ with } a_1> a_2> \dotsb > a_l.
+\end{displaymath}
+
 \section{Crystal Operators}
 \subsection{Definitions}
 Let $w\in A_n^*$.
@@ -78,8 +103,14 @@ As more and more letters of $w$ are frozen, they are excluded from $\tilde w$.
   \label{lemma:tab2tab}
   If $w$ is a tableau then $e_iw$ is also a tableau.
 \end{lemma}
+\begin{proof}
+  Suppose that $w$ is a tabeau.
+  After the freezing process, we are left with $i^rj^s$ (where $j=i+1$).
+  The first $j$ in the unfrozen part always comes from a cell strictly to the right of the cell containing the last $i$in the unfrozen part.
+  Therefore, 
+\end{proof}
 \begin{theorem}
-  If $v=e_i(w)$ then $P(v)=e_i(P(w)$.
+  If $v=e_i(w)$ then $P(v)=e_i(P(w))$.
 \end{theorem}
 \begin{proof}
   By Lemma~\ref{lemma:knuth-plactic}, $P(v)\equiv e_i(P(w))$.
